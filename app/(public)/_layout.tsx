@@ -6,16 +6,15 @@ export default function PublicLayout() {
       <Stack.Screen
         name="welcome"
         options={{
-          title: "Welcome",
-          headerTransparent: true,
+          headerShown: false,
         }}
       />
       <Stack.Screen
         name="sign-up"
         options={{
-          title: "Sign Up",
+          title: "Sign up",
           headerTransparent: true,
-          headerLargeTitle: true,
+          headerLargeTitle: false,
           headerBackButtonDisplayMode: "minimal",
         }}
       />
@@ -24,7 +23,7 @@ export default function PublicLayout() {
         options={{
           title: "Sign In",
           headerTransparent: true,
-          headerLargeTitle: true,
+          headerLargeTitle: false,
           headerBackButtonDisplayMode: "minimal",
         }}
       />

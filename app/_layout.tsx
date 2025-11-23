@@ -25,10 +25,13 @@ function RootNavigator() {
   const { isLoaded, session } = useSupabase();
 
   useEffect(() => {
+    console.log("RootLayout: isLoaded changed", isLoaded);
+    console.log("RootLayout: session exists?", !!session);
     if (isLoaded) {
+      console.log("RootLayout: Hiding splash screen");
       SplashScreen.hide();
     }
-  }, [isLoaded]);
+  }, [isLoaded, session]);
 
   return (
     <Stack
@@ -39,13 +42,8 @@ function RootNavigator() {
         animationDuration: 0,
       }}
     >
-      <Stack.Protected guard={!!session}>
-        <Stack.Screen name="(protected)" />
-      </Stack.Protected>
-
-      <Stack.Protected guard={!session}>
-        <Stack.Screen name="(public)" />
-      </Stack.Protected>
+      <Stack.Screen name="(protected)" redirect={!session} />
+      <Stack.Screen name="(public)" redirect={!!session} />
     </Stack>
   );
 }

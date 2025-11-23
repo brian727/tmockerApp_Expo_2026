@@ -18,7 +18,9 @@ export const useSupabase = (): UseSupabaseProps => {
 
   useEffect(() => {
     if (!supabase) return;
-    supabase.auth.getSession().then(({ data }) => {
+    console.log("useSupabase: Fetching session...");
+    supabase.auth.getSession().then(({ data, error }) => {
+      console.log("useSupabase: Session fetched", { session: !!data.session, error });
       setSession(data.session);
       setIsLoaded(true);
     });
