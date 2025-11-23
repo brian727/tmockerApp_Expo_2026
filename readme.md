@@ -1,57 +1,17 @@
-# Expo Supabase Starter
+# The Tmocker App based off the Expo Supabase Starter
 
 ## Introduction
 
-This repository serves as a comprehensive starter project for developing React Native and Expo applications with Supabase as the backend.
+The Tmocker app is a mobile based community of Tumamoc Hill enthusiasts in Tucson, Arizona. This app is still under development and is not officially on the app stores yet. To use in the meantime, the user has to download Expo Go on their phone. 
 
-#### Disclaimer
-
-This is not supposed to be a template, boilerplate or a framework. It is an opinionated guide that shows how to do some things in a certain way. You are not forced to do everything exactly as it is shown here, decide what works best for you and your team and stay consistent with your style.
+Expo Go is a free mobile app that lets you instantly preview and test apps you’re building without needing to install anything complicated on your phone. It removes the technical hassle of building or installing full app files, so you can focus on designing and testing your app’s look and feel in real time.
 
 ## Get Started
 
-1. Configure Supabase
-   - If you haven't already, create an new account on [Supabase](https://supabase.com/).
-   - Create a new project and obtain your Supabase URL and API key.
+1. DOWNLOAD EXPO GO
+   - [Expo Go]([https://expo.dev/go].
+ 
 
-   Note: By default Supabase Auth requires email verification before a session is created for the users. To send users a one-time code, [modify the confirm signup template](https://supabase.com/dashboard/project/_/auth/templates) like so:
-
-   ```html
-   <h2>Confirm your signup</h2>
-
-   <p>{{ .Token }}</p>
-   ```
-
-2. Clone the repository to your local machine
-
-```bash
-git clone https://github.com/FlemingVincent/expo-supabase-starter.git
-```
-
-3. Navigate to the project directory
-
-```bash
-cd expo-supabase-starter
-```
-
-4. Install dependencies
-
-```bash
-bun install
-```
-
-5. Update environment variables
-   - Update the `EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_KEY` variables in the `.env` file with your Supabase URL and key respectively.
-
-6. Start the Expo development server
-
-```bash
-npx expo start --clear --reset-cache
-```
-
-## Contributing
-
-Contributions to this starter project are highly encouraged and welcome! If you have any suggestions, bug reports, or feature requests, please feel free to create an issue or submit a pull request. Let's work together to enhance the developer experience and make it easier for everyone to build exceptional Expo applications with Supabase.
 
 ## License
 
