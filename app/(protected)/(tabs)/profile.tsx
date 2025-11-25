@@ -202,6 +202,52 @@ export default function ProfilePage() {
     return new Date(dateString).toLocaleDateString();
   };
 
+  const confirmDeleteAccount = () => {
+    Alert.alert(
+      'Delete Account',
+      'Are you sure you want to delete your account? This action cannot be undone and will remove all your data.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { 
+          text: 'Delete', 
+          style: 'destructive', 
+          onPress: deleteAccount 
+        }
+      ]
+    );
+  };
+
+  const deleteAccount = async () => {
+    if (!user) return;
+    setLoading(true);
+    try {
+      // 1. Delete Hikes
+      const { error: hikesError } = await supabase
+        .from('hikes')
+        .delete()
+        .eq('user_id', user.id);
+      
+      if (hikesError) throw hikesError;
+
+      // 2. Delete Profile
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .delete()
+        .eq('id', user.id);
+
+      if (profileError) throw profileError;
+
+      // 3. Sign Out
+      await signOut();
+      Alert.alert('Account Deleted', 'Your account has been successfully deleted.');
+    } catch (error) {
+      console.error('Error deleting account:', error);
+      Alert.alert('Error', 'Failed to delete account. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <KeyboardAvoidingView 
       style={[styles.container, { paddingTop: insets.top }]}
@@ -311,6 +357,15 @@ export default function ProfilePage() {
               </TouchableOpacity>
             </View>
           </View>
+        )}
+        
+        {!isEditing && (
+          <TouchableOpacity 
+            style={styles.deleteButton} 
+            onPress={confirmDeleteAccount}
+          >
+            <Text style={styles.deleteButtonText}>Delete Account</Text>
+          </TouchableOpacity>
         )}
       </View>
 
@@ -475,6 +530,16 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
+  deleteButton: {
+    marginTop: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  deleteButtonText: {
+    color: '#999',
+    fontSize: 14,
+    textDecorationLine: 'underline',
+  },
   statsSection: {
     flex: 1,
     backgroundColor: 'white',
@@ -520,5 +585,19 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#999',
     marginTop: 20,
+  },
+  nameDisplayContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  nameText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginRight: 8,
+  },
+  pencilIcon: {
+    opacity: 0.8,
   },
 });
